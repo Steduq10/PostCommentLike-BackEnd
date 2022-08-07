@@ -3,6 +3,7 @@ package com.SOFKA.PostCommentLike.dto;
 import com.SOFKA.PostCommentLike.entity.Comment;
 import com.SOFKA.PostCommentLike.entity.Post;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.Set;
 
 @Data
+@NoArgsConstructor
 public class UserLikeDTO {
     private Integer id;
 

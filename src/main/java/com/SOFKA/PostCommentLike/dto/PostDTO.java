@@ -4,6 +4,7 @@ package com.SOFKA.PostCommentLike.dto;
 import com.SOFKA.PostCommentLike.entity.Comment;
 import com.SOFKA.PostCommentLike.entity.UserLike;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.Set;
 
 @Data
+@NoArgsConstructor
 public class PostDTO {
     private Integer id;
     @Size(min= 5 ,max= 50, message = "The element doesn't have the right amount of characters")
@@ -27,4 +29,7 @@ public class PostDTO {
     private List<CommentDTO> comments = new ArrayList<>();
    // private Set<UserLikeDTO> userLikes = new LinkedHashSet<>();
     private List<UserLikeDTO> userLikes = new ArrayList<>();
+
+
+
 }

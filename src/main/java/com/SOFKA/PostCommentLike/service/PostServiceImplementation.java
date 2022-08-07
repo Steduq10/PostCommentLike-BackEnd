@@ -41,9 +41,9 @@ public class PostServiceImplementation implements PostService{
 
     @Override
     public PostDTO createPost(PostDTO postDTO){
-        return postMapper
-                .convertPostToDto(postRepository.save(postMapper.dtoMapper(postDTO)));
-
+        System.out.println(postDTO);
+        Post post = postMapper.dtoMapper(postDTO);
+                return postMapper.convertPostToDto(postRepository.save(post));
     }
 
   /*  @Override

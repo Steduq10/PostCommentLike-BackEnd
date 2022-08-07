@@ -29,33 +29,33 @@ public class GeneralController {
        return postService.getAllPost();
     }
 
-    @PostMapping("save/post")
-    public PostDTO createPost(PostDTO postDTO){
+    @PostMapping("create/post")
+    public PostDTO createPost(@RequestBody PostDTO postDTO){
         return postService.createPost(postDTO);
     }
 
-    @PostMapping("save/comment")
-    public CommentDTO createComment(CommentDTO commentDTO){
+    @PostMapping("create/comment")
+    public CommentDTO createComment(@RequestBody  CommentDTO commentDTO){
         return commentService.createComment(commentDTO);
     }
 
     @PutMapping("edit/post")
-    public PostDTO editPost(PostDTO postDTO){
+    public PostDTO editPost(@RequestBody PostDTO postDTO){
         return postService.editPost(postDTO);
     }
 
     @PutMapping("edit/comment")
-    public CommentDTO editComment(CommentDTO commentDTO){
+    public CommentDTO editComment(@RequestBody CommentDTO commentDTO){
         return commentService.editComment(commentDTO);
     }
 
     @DeleteMapping("delete/post")
-    public void deletePost(Integer id){
+    public void deletePost(@RequestBody Integer id){
         postService.deletePost(id);
     }
 
     @DeleteMapping("delete/comment")
-    public void deleteComment(Integer id){
+    public void deleteComment(@RequestBody Integer id){
         commentService.deleteComment(id);
     }
 

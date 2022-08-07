@@ -1,5 +1,9 @@
 package com.SOFKA.PostCommentLike.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
@@ -8,6 +12,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "post")
+@NoArgsConstructor
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,10 +32,12 @@ public class Post {
     //private String likes;
 
     @OneToMany(mappedBy = "postIdPost")
+    @JsonManagedReference
   //  private Set<Comment> comments = new LinkedHashSet<>();
     private List<Comment> comments = new ArrayList<>();
 
     @ManyToMany
+    @JsonBackReference
     @JoinTable(name = "post_has_user_like",
             joinColumns = @JoinColumn(name = "post_id_post"),
             inverseJoinColumns = @JoinColumn(name = "user_like_iduser_like"))
