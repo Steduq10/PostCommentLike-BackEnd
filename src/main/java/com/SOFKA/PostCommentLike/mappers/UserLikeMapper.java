@@ -12,8 +12,8 @@ public class UserLikeMapper {
         userLikeDTO.setId(userLike.getId());
         userLikeDTO.setUserName(userLike.getUserName());
         userLikeDTO.setDni(userLike.getDni());
-        userLikeDTO.setComments(userLike.getComments());
-        userLikeDTO.setPosts(userLike.getPosts());
+        userLikeDTO.setComments(userLikeDTO.getComments());
+        userLikeDTO.setPosts(userLikeDTO.getPosts());
         return userLikeDTO;
     }
 }

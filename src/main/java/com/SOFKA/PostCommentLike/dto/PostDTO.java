@@ -21,6 +21,6 @@ public class PostDTO {
     @Min(value= 0 ,message = "The element doesn't have the right amount of characters")
     private Integer numberOfLikes;
     private String likes;
-    private Set<Comment> comments = new LinkedHashSet<>();
-    private Set<UserLike> userLikes = new LinkedHashSet<>();
+    private Set<CommentDTO> comments = new LinkedHashSet<>();
+    private Set<UserLikeDTO> userLikes = new LinkedHashSet<>();
 }

@@ -17,11 +17,20 @@ public class CommentMapper {
         CommentDTO commentDTO = new CommentDTO();
         commentDTO.setId(comment.getId());
         commentDTO.setContent(comment.getContent());
+        commentDTO.setPostIdPost(comment.getPostIdPost());
         commentDTO.setLikes(comment.getLikes());
         commentDTO.setNumberOfLikes(comment.getNumberOfLikes());
-        commentDTO.setUserLikes(comment.getUserLikes());
-        //commentDTO.setUserLikes(comment.getUserLikes().stream().map(userLikeMapper::convertUserLikeToDto).collect(Collectors.toSet()));
+        //commentDTO.setUserLikes(comment.getUserLikes());
+        commentDTO.setUserLikes(comment.getUserLikes().stream().map(userLikeMapper::convertUserLikeToDto).collect(Collectors.toSet()));
         return commentDTO;
     }
+    public Comment dtoToEntity(CommentDTO commentDTO){
+        Comment comment = new Comment();
+        comment.setContent(commentDTO.getContent());
+        comment.setPostIdPost(commentDTO.getPostIdPost());
+       // comment.setUserLikes(commentDTO.getUserLikes());
+        //TERMINAR
 
+        return comment;
+    }
 }

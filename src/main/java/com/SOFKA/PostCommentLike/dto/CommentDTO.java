@@ -21,5 +21,5 @@ public class CommentDTO {
 
     private String likes;
     private Post postIdPost;
-    private Set<UserLike> userLikes = new LinkedHashSet<>();
+    private Set<UserLikeDTO> userLikes = new LinkedHashSet<>();
 }

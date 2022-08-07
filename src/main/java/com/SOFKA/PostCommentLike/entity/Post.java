@@ -21,8 +21,8 @@ public class Post {
     @Column(name = "number_of_likes")
     private Integer numberOfLikes;
 
-    @Column(name = "likes", length = 45)
-    private String likes;
+    //@Column(name = "likes", length = 45)
+    //private String likes;
 
     @OneToMany(mappedBy = "postIdPost")
     private Set<Comment> comments = new LinkedHashSet<>();
@@ -65,13 +65,13 @@ public class Post {
         this.numberOfLikes = numberOfLikes;
     }
 
-    public String getLikes() {
-        return likes;
-    }
+    //public String getLikes() {
+    //    return likes;
+   // }
 
-    public void setLikes(String likes) {
-        this.likes = likes;
-    }
+    //public void setLikes(String likes) {
+       // this.likes = likes;
+  //  }
 
     public Set<Comment> getComments() {
         return comments;
