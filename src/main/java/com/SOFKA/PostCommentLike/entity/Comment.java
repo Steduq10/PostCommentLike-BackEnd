@@ -1,7 +1,9 @@
 package com.SOFKA.PostCommentLike.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -18,8 +20,8 @@ public class Comment {
     @Column(name = "number_of_likes", length = 45)
     private String numberOfLikes;
 
-    @Column(name = "likes", length = 45)
-    private String likes;
+   // @Column(name = "likes", length = 45)
+   // private String likes;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "post_id_post", nullable = false)
@@ -29,7 +31,8 @@ public class Comment {
     @JoinTable(name = "comment_has_user_like",
             joinColumns = @JoinColumn(name = "comment_id_comments"),
             inverseJoinColumns = @JoinColumn(name = "user_like_iduser_like"))
-    private Set<UserLike> userLikes = new LinkedHashSet<>();
+    //private Set<UserLike> userLikes = new LinkedHashSet<>();
+    private List<UserLike> userLikes = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -55,13 +58,13 @@ public class Comment {
         this.numberOfLikes = numberOfLikes;
     }
 
-    public String getLikes() {
-        return likes;
-    }
+   // public String getLikes() {
+    //    return likes;
+   // }
 
-    public void setLikes(String likes) {
-        this.likes = likes;
-    }
+    //public void setLikes(String likes) {
+     //   this.likes = likes;
+  //  }
 
     public Post getPostIdPost() {
         return postIdPost;
@@ -71,11 +74,11 @@ public class Comment {
         this.postIdPost = postIdPost;
     }
 
-    public Set<UserLike> getUserLikes() {
+    public List<UserLike> getUserLikes() {
         return userLikes;
     }
 
-    public void setUserLikes(Set<UserLike> userLikes) {
+    public void setUserLikes(List<UserLike> userLikes) {
         this.userLikes = userLikes;
     }
 

@@ -6,7 +6,9 @@ import lombok.Data;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -19,7 +21,8 @@ public class CommentDTO {
     @Min(value= 0 ,message = "The element doesn't have the right amount of characters")
     private String numberOfLikes;
 
-    private String likes;
+    //private String likes;
     private Post postIdPost;
-    private Set<UserLikeDTO> userLikes = new LinkedHashSet<>();
+   // private Set<UserLikeDTO> userLikes = new LinkedHashSet<>();
+    private List<UserLikeDTO> userLikes = new ArrayList<>();
 }

@@ -1,9 +1,11 @@
 package com.SOFKA.PostCommentLike.service;
 
+import com.SOFKA.PostCommentLike.dto.CommentDTO;
 import com.SOFKA.PostCommentLike.entity.Comment;
 
 public interface CommentService {
-    Comment createComment (Comment comment);
-    Comment editComment (Comment comment);
+    CommentDTO createComment (CommentDTO commentDTO);
+
+    CommentDTO editComment (CommentDTO commentDTO);
     void deleteComment (Integer id);
 }

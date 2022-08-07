@@ -24,14 +24,15 @@ public class UserLike {
     @JoinTable(name = "comment_has_user_like",
             joinColumns = @JoinColumn(name = "user_like_iduser_like"),
             inverseJoinColumns = @JoinColumn(name = "comment_id_comments"))
-    private Set<Comment> comments = new LinkedHashSet<>();
+    //private Set<Comment> comments = new LinkedHashSet<>();
+    private List<Comment> comments = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(name = "post_has_user_like",
             joinColumns = @JoinColumn(name = "user_like_iduser_like"),
             inverseJoinColumns = @JoinColumn(name = "post_id_post"))
-    private Set<Post> posts = new LinkedHashSet<>();
-    //private List<Post> posts = new ArrayList<>();
+   // private Set<Post> posts = new LinkedHashSet<>();
+    private List<Post> posts = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -57,19 +58,19 @@ public class UserLike {
         this.dni = dni;
     }
 
-    public Set<Comment> getComments() {
+    public List<Comment> getComments() {
         return comments;
     }
 
-    public void setComments(Set<Comment> comments) {
+    public void setComments(List<Comment> comments) {
         this.comments = comments;
     }
 
-    public Set<Post> getPosts() {return posts;}
+    public List<Post> getPosts() {return posts;}
     //public List<Post> getPosts() {
     //    return posts;
    // }
-    public void setPosts(Set<Post> posts) {this.posts = posts;}
+    public void setPosts(List<Post> posts) {this.posts = posts;}
     //public void setPosts(List<Post> posts) {this.posts = posts;}
 
 

@@ -18,8 +18,8 @@ public class UserLikeDTO {
     private String userName;
     @Size(min= 8 ,max= 20, message = "The element doesn't have the right amount of characters")
     private String dni;
-    private Set<CommentDTO> comments = new LinkedHashSet<>();
-    //private List<Comment> comments = new ArrayList<>();
-    private Set<PostDTO> posts = new LinkedHashSet<>();
-    //private List<Post> posts = new ArrayList<>();
+   // private Set<CommentDTO> comments = new LinkedHashSet<>();
+    private List<CommentDTO> comments = new ArrayList<>();
+   // private Set<PostDTO> posts = new LinkedHashSet<>();
+    private List<PostDTO> posts = new ArrayList<>();
 }

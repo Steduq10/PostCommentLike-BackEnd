@@ -6,6 +6,7 @@ import com.SOFKA.PostCommentLike.dto.UserLikeDTO;
 import com.SOFKA.PostCommentLike.entity.Post;
 import com.SOFKA.PostCommentLike.entity.Comment;
 import com.SOFKA.PostCommentLike.entity.UserLike;
+import com.SOFKA.PostCommentLike.mappers.PostMapper;
 import com.SOFKA.PostCommentLike.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,65 +23,60 @@ public class PostServiceImplementation implements PostService{
     @Autowired
     private PostRepository postRepository;
 
+    @Autowired
+    private PostMapper postMapper;
+
+    @Autowired
+    private UserLikeService userLikeService;
+
+    @Autowired
+    private CommentService commentService;
+
     public List<PostDTO> getAllPost(){
         return postRepository.findAll()
                 .stream()
-                .map(this::convertPostToDto)
+                .map(postMapper::convertPostToDto)
                 .collect(Collectors.toList());
-
-    }
-
-    private UserLikeDTO convertUserLikeToDto(UserLike userLike){
-        UserLikeDTO userLikeDTO = new UserLikeDTO();
-        userLikeDTO.setId(userLike.getId());
-        userLikeDTO.setUserName(userLike.getUserName());
-        userLikeDTO.setDni(userLike.getDni());
-        userLikeDTO.setComments(userLike.getComments());
-        userLikeDTO.setPosts(userLike.getPosts());
-        return userLikeDTO;
-    }
-
-    private CommentDTO convertCommentToDto(Comment comment){
-        CommentDTO commentDTO = new CommentDTO();
-        commentDTO.setId(comment.getId());
-        commentDTO.setContent(comment.getContent());
-        commentDTO.setLikes(comment.getLikes());
-        commentDTO.setNumberOfLikes(comment.getNumberOfLikes());
-        commentDTO.setUserLikes(comment.getUserLikes());
-
-        return commentDTO;
-    }
-
-    private PostDTO convertPostToDto(Post post){
-        PostDTO postDTO = new PostDTO();
-        postDTO.setId(post.getId());
-        postDTO.setTitle(post.getTitle());
-        postDTO.setContent(post.getContent());
-        postDTO.setLikes(post.getLikes());
-        postDTO.setNumberOfLikes(post.getNumberOfLikes());
-        postDTO.setUserLikes(post.getUserLikes());
-        postDTO.setComments(post.getComments());
-        return postDTO;
-    }
-
-
-    @Override
-    public Post createPost(Post post) {
-        Objects.requireNonNull(post);
-        return postRepository.save(post);
     }
 
     @Override
-    public Post editPost(Post post) {
-        Objects.requireNonNull(post);
-        Objects.requireNonNull(post.getId());
+    public PostDTO createPost(PostDTO postDTO){
+        return postMapper
+                .convertPostToDto(postRepository.save(postMapper.dtoMapper(postDTO)));
 
-        postRepository.save(post);
-        return post;
     }
 
+  /*  @Override
+    public void createPost(PostDTO postDTO){
+        postRepository.save(postMapper.dtoMapper(postDTO));
+
+    }*/
+
     @Override
-    public void deletePost(Integer id) {
+    public PostDTO editPost(PostDTO postDTO){
+        var targetPost = postRepository.findById(postDTO.getId());
+        if(targetPost.isPresent()){
+            var postEdited = postRepository.save(postMapper.dtoMapper(postDTO));
+            var postEditedDTO = postMapper.convertPostToDto(postEdited);
+            return postEditedDTO;
+        }
+        throw new IllegalStateException("We couldn't find the post");
+    }
+
+    /*@Override
+    public void editPost(PostDTO postDTO){
+        Post targetPost = postRepository.getReferenceById(postDTO.getId());
+
+        targetPost.setContent(postDTO.getContent());
+        targetPost.setTitle(postDTO.getTitle());
+    }*/
+    @Override
+    public void deletePost(Integer id){
+        Post targetPost = postRepository.getReferenceById(id);
+        List<UserLike> postLikes = targetPost.getUserLikes();
+        List<Comment> postComments = targetPost.getComments();
+        postLikes.forEach(userLike -> userLikeService.deleteLike(userLike.getId()));
+        postComments.forEach(comment -> commentService.deleteComment(comment.getId()));
         postRepository.deleteById(id);
     }
 }

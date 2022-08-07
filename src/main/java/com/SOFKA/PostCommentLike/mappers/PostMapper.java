@@ -15,25 +15,25 @@ public class PostMapper {
     @Autowired
     CommentMapper commentMapper;
 
-    private PostDTO convertPostToDto(Post post){
+    public PostDTO convertPostToDto(Post post){
         PostDTO postDTO = new PostDTO();
         postDTO.setId(post.getId());
         postDTO.setTitle(post.getTitle());
         postDTO.setContent(post.getContent());
-        //postDTO.setLikes(post.getLikes());
         postDTO.setNumberOfLikes(post.getNumberOfLikes());
-       // postDTO.setUserLikes(post.getUserLikes());
-        postDTO.setUserLikes(post.getUserLikes().stream().map(userLikeMapper::convertUserLikeToDto).collect(Collectors.toSet()));
-        //postDTO.setComments(post.getComments());
-        postDTO.setComments(post.getComments().stream().map(commentMapper::convertCommentToDto).collect(Collectors.toSet()));
+        postDTO.setUserLikes(post.getUserLikes().stream().map(userLikeMapper::convertUserLikeToDto).collect(Collectors.toList()));
+        postDTO.setComments(post.getComments().stream().map(commentMapper::convertCommentToDto).collect(Collectors.toList()));
         return postDTO;
     }
 
     public  Post dtoMapper(PostDTO postDTO){
         Post post = new Post();
         post.setId(postDTO.getId());
-        //TERMINAR
-
+        post.setTitle(postDTO.getTitle());
+        post.setContent(postDTO.getContent());
+        post.setNumberOfLikes(postDTO.getNumberOfLikes());
+        post.setUserLikes(postDTO.getUserLikes().stream().map(userLikeMapper::userLikeDtoMapper).collect(Collectors.toList()));
+        post.setComments(postDTO.getComments().stream().map(commentMapper::commentDtoToEntity).collect(Collectors.toList()));
         return post;
     }
 }
