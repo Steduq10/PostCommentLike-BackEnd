@@ -28,16 +28,17 @@ public class Post {
     @Column(name = "number_of_likes")
     private Integer numberOfLikes;
 
-    //@Column(name = "likes", length = 45)
-    //private String likes;
+
+    @JsonManagedReference
 
     @OneToMany(mappedBy = "postIdPost")
-    @JsonManagedReference
+
   //  private Set<Comment> comments = new LinkedHashSet<>();
     private List<Comment> comments = new ArrayList<>();
 
+  //  @JsonBackReference
     @ManyToMany
-    @JsonBackReference
+
     @JoinTable(name = "post_has_user_like",
             joinColumns = @JoinColumn(name = "post_id_post"),
             inverseJoinColumns = @JoinColumn(name = "user_like_iduser_like"))
@@ -75,14 +76,6 @@ public class Post {
     public void setNumberOfLikes(Integer numberOfLikes) {
         this.numberOfLikes = numberOfLikes;
     }
-
-    //public String getLikes() {
-    //    return likes;
-   // }
-
-    //public void setLikes(String likes) {
-       // this.likes = likes;
-  //  }
 
     public List<Comment> getComments() {
         return comments;

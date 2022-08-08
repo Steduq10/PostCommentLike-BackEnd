@@ -17,7 +17,7 @@ public class CommentMapper {
         CommentDTO commentDTO = new CommentDTO();
         commentDTO.setId(comment.getId());
         commentDTO.setContent(comment.getContent());
-        commentDTO.setPostIdPost(comment.getPostIdPost());
+        //commentDTO.setPostIdPost(comment.getPostIdPost());
         commentDTO.setNumberOfLikes(comment.getNumberOfLikes());
         commentDTO.setUserLikes(comment.getUserLikes().stream().map(userLikeMapper::convertUserLikeToDto).collect(Collectors.toList()));
         return commentDTO;

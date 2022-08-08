@@ -49,12 +49,12 @@ public class GeneralController {
         return commentService.editComment(commentDTO);
     }
 
-    @DeleteMapping("delete/post")
+    @DeleteMapping("delete/post/{id}")
     public void deletePost(@RequestBody Integer id){
         postService.deletePost(id);
     }
 
-    @DeleteMapping("delete/comment")
+    @DeleteMapping("delete/comment/{id}")
     public void deleteComment(@RequestBody Integer id){
         commentService.deleteComment(id);
     }

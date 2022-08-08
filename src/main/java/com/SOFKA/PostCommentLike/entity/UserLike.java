@@ -25,7 +25,7 @@ public class UserLike {
     private String dni;
 
     @ManyToMany
-    @JsonBackReference
+   // @JsonBackReference
     @JoinTable(name = "comment_has_user_like",
             joinColumns = @JoinColumn(name = "user_like_iduser_like"),
             inverseJoinColumns = @JoinColumn(name = "comment_id_comments"))
@@ -33,7 +33,7 @@ public class UserLike {
     private List<Comment> comments = new ArrayList<>();
 
     @ManyToMany
-    @JsonBackReference
+   // @JsonBackReference
     @JoinTable(name = "post_has_user_like",
             joinColumns = @JoinColumn(name = "user_like_iduser_like"),
             inverseJoinColumns = @JoinColumn(name = "post_id_post"))

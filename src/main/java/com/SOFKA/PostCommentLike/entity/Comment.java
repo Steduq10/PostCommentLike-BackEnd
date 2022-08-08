@@ -25,16 +25,18 @@ public class Comment {
     @Column(name = "number_of_likes", length = 45)
     private String numberOfLikes;
 
-   // @Column(name = "likes", length = 45)
-   // private String likes;
+
+    @JsonBackReference
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JsonBackReference
+
     @JoinColumn(name = "post_id_post", nullable = false)
     private Post postIdPost;
 
+    //@JsonBackReference
+    //@JsonManagedReference
     @ManyToMany
-    @JsonBackReference
+
     @JoinTable(name = "comment_has_user_like",
             joinColumns = @JoinColumn(name = "comment_id_comments"),
             inverseJoinColumns = @JoinColumn(name = "user_like_iduser_like"))
@@ -64,14 +66,6 @@ public class Comment {
     public void setNumberOfLikes(String numberOfLikes) {
         this.numberOfLikes = numberOfLikes;
     }
-
-   // public String getLikes() {
-    //    return likes;
-   // }
-
-    //public void setLikes(String likes) {
-     //   this.likes = likes;
-  //  }
 
     public Post getPostIdPost() {
         return postIdPost;
