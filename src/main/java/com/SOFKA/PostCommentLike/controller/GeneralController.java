@@ -2,6 +2,8 @@ package com.SOFKA.PostCommentLike.controller;
 
 import com.SOFKA.PostCommentLike.dto.CommentDTO;
 import com.SOFKA.PostCommentLike.dto.PostDTO;
+import com.SOFKA.PostCommentLike.entity.Comment;
+import com.SOFKA.PostCommentLike.entity.Post;
 import com.SOFKA.PostCommentLike.repository.CommentRepository;
 import com.SOFKA.PostCommentLike.service.CommentServiceImplementation;
 import com.SOFKA.PostCommentLike.service.PostServiceImplementation;
@@ -49,14 +51,23 @@ public class GeneralController {
         return commentService.editComment(commentDTO);
     }
 
-    @DeleteMapping("delete/post/{id}")
-    public void deletePost(@RequestBody Integer id){
+   /* @DeleteMapping("delete/post/{id}")
+    public void deletePost(@PathVariable Integer id){
         postService.deletePost(id);
+    }*/
+
+    @DeleteMapping("delete/post")
+    public void deletePost(@RequestBody Post post){
+        postService.deletePost(post);
     }
 
-    @DeleteMapping("delete/comment/{id}")
-    public void deleteComment(@RequestBody Integer id){
+    /*@DeleteMapping("delete/comment/{id}")
+    public void deleteComment(@PathVariable Integer id){
         commentService.deleteComment(id);
+    }*/
+    @DeleteMapping("delete/comment")
+    public void deleteComment(@RequestBody Comment comment){
+        commentService.deleteComment(comment);
     }
 
 }

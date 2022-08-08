@@ -7,6 +7,7 @@ import com.SOFKA.PostCommentLike.entity.Post;
 import com.SOFKA.PostCommentLike.entity.Comment;
 import com.SOFKA.PostCommentLike.entity.UserLike;
 import com.SOFKA.PostCommentLike.mappers.PostMapper;
+import com.SOFKA.PostCommentLike.repository.CommentRepository;
 import com.SOFKA.PostCommentLike.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,8 @@ public class PostServiceImplementation implements PostService{
     @Autowired
     private PostRepository postRepository;
 
+    @Autowired
+    private CommentRepository commentRepository;
     @Autowired
     private PostMapper postMapper;
 
@@ -70,13 +73,22 @@ public class PostServiceImplementation implements PostService{
         targetPost.setContent(postDTO.getContent());
         targetPost.setTitle(postDTO.getTitle());
     }*/
-    @Override
-    public void deletePost(Integer id){
-        Post targetPost = postRepository.getReferenceById(id);
+    //@Override
+  //  public void deletePost(Integer id){
+       /* Post targetPost = postRepository.getReferenceById(id);
         List<UserLike> postLikes = targetPost.getUserLikes();
         List<Comment> postComments = targetPost.getComments();
         postLikes.forEach(userLike -> userLikeService.deleteLike(userLike.getId()));
-        postComments.forEach(comment -> commentService.deleteComment(comment.getId()));
-        postRepository.deleteById(id);
+        postComments.forEach(comment -> commentService.deleteComment(comment.getId()));*/
+      //  postRepository.deleteById(id);
+  //  }
+
+    @Override
+    public void deletePost(Post post){
+       Post postToBeDeleted = postRepository.findById(post.getId()).get();
+       if (postToBeDeleted.getComments().size()>=0){
+           postToBeDeleted.getComments().forEach(comment -> commentRepository.deleteById(comment.getId()));
+       }
+       postRepository.deleteById(post.getId());
     }
 }

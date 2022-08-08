@@ -61,13 +61,18 @@ public class CommentServiceImplementation implements CommentService {
         }
         throw new IllegalStateException("We couldn't find the comment");
     }
-    @Override
-    public void deleteComment(Integer id){
-        Comment targetComment = commentRepository.getReferenceById(id);
+    //@Override
+   // public void deleteComment(Integer id){
+     //  /* Comment targetComment = commentRepository.getReferenceById(id);
 
-        List<UserLike> commentLikes = targetComment.getUserLikes();
-        commentLikes.forEach(userLike -> userLikeService.deleteLike(userLike.getId()));
-        commentRepository.deleteById(id);
+      //  List<UserLike> commentLikes = targetComment.getUserLikes();
+      //  commentLikes.forEach(userLike -> userLikeService.deleteLike(userLike.getId()));*/
+      //  commentRepository.deleteById(id);
+  // }
+
+    @Override
+    public void deleteComment(Comment comment){
+        commentRepository.deleteById(comment.getId());
     }
 
 

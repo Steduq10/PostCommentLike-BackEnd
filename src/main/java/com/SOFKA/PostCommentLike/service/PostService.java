@@ -9,5 +9,6 @@ public interface PostService {
 
     PostDTO createPost (PostDTO postDTO);
     PostDTO editPost (PostDTO postDTO);
-    void deletePost (Integer id);
+    //void deletePost (Integer id);
+    void deletePost (Post post);
 }
