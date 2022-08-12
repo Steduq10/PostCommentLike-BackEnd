@@ -17,7 +17,7 @@ public class CommentMapper {
         CommentDTO commentDTO = new CommentDTO();
         commentDTO.setId(comment.getId());
         commentDTO.setContent(comment.getContent());
-        //commentDTO.setPostIdPost(comment.getPostIdPost());
+        //commentDTO.setPostIdPost(postMapper.convertPostToDto(comment.getPostIdPost()));
         commentDTO.setNumberOfLikes(comment.getNumberOfLikes());
         commentDTO.setUserLikes(comment.getUserLikes().stream().map(userLikeMapper::convertUserLikeToDto).collect(Collectors.toList()));
         return commentDTO;
@@ -27,6 +27,7 @@ public class CommentMapper {
         comment.setId(commentDTO.getId());
         comment.setContent(commentDTO.getContent());
         comment.setPostIdPost(commentDTO.getPostIdPost());
+       // comment.setPostIdPost(postMapper.convertPostToDto(commentDTO.getPostIdPost()));
         comment.setNumberOfLikes(commentDTO.getNumberOfLikes());
         comment.setUserLikes(commentDTO.getUserLikes().stream().map(userLikeMapper::userLikeDtoMapper).collect(Collectors.toList()));
         return comment;

@@ -61,13 +61,13 @@ public class GeneralController {
         postService.deletePost(post);
     }
 
-    /*@DeleteMapping("delete/comment/{id}")
+    @DeleteMapping("delete/comment/{id}")
     public void deleteComment(@PathVariable Integer id){
         commentService.deleteComment(id);
-    }*/
-    @DeleteMapping("delete/comment")
+    }
+   /* @DeleteMapping("delete/comment")
     public void deleteComment(@RequestBody Comment comment){
         commentService.deleteComment(comment);
-    }
+    }*/
 
 }

@@ -26,6 +26,7 @@ public class PostDTO {
     private Integer numberOfLikes;
   //  private String likes;
    // private Set<CommentDTO> comments = new LinkedHashSet<>();
+
     private List<CommentDTO> comments = new ArrayList<>();
    // private Set<UserLikeDTO> userLikes = new LinkedHashSet<>();
     private List<UserLikeDTO> userLikes = new ArrayList<>();
